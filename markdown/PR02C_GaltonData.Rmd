@@ -8,7 +8,6 @@ output:
     highlight: textmate
     code_folding: hide
 ---
-
 ```{r globaloptions, include = FALSE}
 knitr::opts_chunk$set(
   message = FALSE,
@@ -23,7 +22,10 @@ knitr::opts_chunk$set(
 ### Packages Used
 
 ```{r loadpackages}
-
+library(tidyverse)
+library(dplyr)
+library(magrittr)
+library(ggplot2)
 ```
 
 ### Datasets Used
@@ -35,20 +37,104 @@ Francis Galton, a cousin of Charles Darwin, studied the relationship between par
 #### Galton Main Dataset
 
 ```{r loadmaindata}
+url <- "https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonfamiliesmain.csv"
+if(!dir.exists("./data/"))
+{dir.create("./data/")}
+if(!file.exists("./data/galtonfamiliesmain.csv")){
+    download.file(url, destfile = "./data/galtonfamiliesmain.csv")}
+data_main <- read_csv("./data/galtonfamiliesmain.csv")
+glimpse(data_main)
+        
+```
 
+```{r}
+data_main <- data_main %>%
+  mutate(
+    familyID = as.numeric(ifelse(FamilyID == "136A", 205, FamilyID)),
+    motherT = Mother * 1.08,
+    midparent = (Father + motherT) / 2,
+    heightT = ifelse(Child == "Daughter", Height * 1.08, Height)
+  ) %>%
+  select(
+    familyID,
+    child_num = Children,
+    father = Father,
+    mother = Mother,
+    motherT,
+    midparent,
+    child_gen = Child,
+    height = Height,
+    heightT
+  ) %>%
+  arrange(
+    familyID,
+    desc(child_gen),
+    desc(height)
+  )
+glimpse(data_main)
 ```
 
 #### Galton Subset Dataset
 
 ```{r loadsubdata}
+url <- "https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonfamiliessub.csv"
+if(!dir.exists("./data/"))
+{dir.create("./data/")}
+if(!file.exists("./data/galtonfamiliessub.csv")){
+    download.file(url, destfile = "./data/galtonfamiliessub.csv")}
+data_sub <- read_csv("./data/galtonfamiliessub.csv")
+glimpse(data_sub)
 
+```
+
+```{r}
+data_sub <- data_sub %>%
+  mutate(
+    father = FatherR + 60,
+    mother = MotherR + 60,
+    motherT = mother * 1.08,
+    midparent = (father + motherT) / 2,
+    height = HeightR + 60,
+    heightT = ifelse(Child == "Daughter", height * 1.08, height)
+  ) %>%
+  select(
+    familyID = FamilyID,
+    child_num = Children,
+    father,
+    mother,
+    motherT,
+    midparent,
+    child_gen = Child,
+    height,
+    heightT
+  ) %>%
+  arrange(
+    familyID,
+    desc(child_gen),
+    desc(height)
+  )
+glimpse(data_sub)
 ```
 
 #### Galton Notebook Dataset
 
 ```{r loadnotebook}
-
+url <- "https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonfamiliesnotebook.csv"
+if(!dir.exists("./data/"))
+{dir.create("./data/")}
+if(!file.exists("./data/galtonfamiliesnotebook.csv")){
+    download.file(url, destfile = "./data/galtonfamiliesnotebook.csv")}
+data_notebook <- read_csv("./data/galtonfamiliesnotebook.csv")
+glimpse(data_notebook)
 ```
+
+```{r}
+data_notebook <- data_notebook %>%
+  select(familyID = FamilyID,
+         page = Page)
+glimpse(data_notebook)
+```
+
 
 <hr>
 
@@ -76,15 +162,25 @@ Load the three Galton datasets and use `glimpse()` to explore their structures. 
    * in order of height within each sex of child
 
 ```{r assembledata1}
-
+bind_rows(data_main, data_sub) -> data_new
+merge(x=data_new, y=data_notebook, by="familyID") %>%
+  arrange(familyID,
+          factor(child_gen, levels=c('Son','Daugter')),
+          height) -> data_all
+glimpse(data_all)
 ```
+
 
 #### Dataset #2
 
 From Dataset #1, select the variables `familyid` and `num_children`, then reduce the dataset so it contains only one unique row per family. Use `glimpse()` to display the result. (Hint: The final dataset should have 205 rows/observations and two variables/columns.)
 
 ```{r assembledata2}
-
+dataset_2 <- data_all %>%
+  select(familyid = familyID,
+         num_children = child_num) %>%
+  distinct()
+glimpse(dataset_2)
 ```
 
 ### Visualization 1: Updated Scatterplot
