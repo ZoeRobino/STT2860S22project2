@@ -214,7 +214,15 @@ Include the following.
 * use `theme()` to move the legend to the bottom of the scatterplot
 
 ```{r updatedscatterplot}
-
+p1 <- ggplot(data_all, aes(x=height, y=midparent, color=child_gen)) +
+  geom_point(alpha=.35, size=2.5) +
+  scale_color_manual(values = c("#FFB000","#648FFF")) +
+  scale_x_continuous(breaks= 55:80) + 
+  scale_y_continuous(breaks= 64:76) + 
+  coord_fixed() + 
+  labs(color = "Gender of child", title = "Average of the parents’ heights versus the height of children by gender", x = "Childrens height in inches", y="Parents height in inches") + 
+  theme_linedraw()
+p1 + theme(legend.position = "bottom")
 ```
 
 ### Visualization 2: Number of Children
