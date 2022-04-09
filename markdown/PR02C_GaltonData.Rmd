@@ -232,6 +232,12 @@ p1 + theme(legend.position = "bottom")
 Create a barplot to show the distribution of the number of children per family. Set the bars to something other than the default `width`. Scale the x-axis so that there is a tick mark for each bar. Choose appropriate colors, labels, themes, and/or and other types of formatting that you feel will enhance the meaning or visual appearance of the plot.  (Hint: Use `count()` to find out how many families have a given number of children, then use that information to create your plot.)
 
 ```{r childrenbarplot}
+ggplot(dataset_2, aes(num_children)) +
+  geom_bar(width = 1, color = "white", fill = "#DC267F") +
+  scale_x_continuous(breaks= 0:15) +
+  labs(title = "Number of children per family", x = "Number of children", y="Number of families") +
+  geom_text(aes(label = ..count..), stat = "count", vjust = -.3, size = 3.5) +
+  theme_linedraw()
 
 ```
 
@@ -243,19 +249,21 @@ Create a barplot to show the distribution of the number of children per family. 
 
 **ANSWER**
 
-ERASE THIS TEXT AND ANSWER QUESTION HERE
+I feel that our updated scatterplot is an improvement to Galton's original diagram beacuse it is visually cleaner. Something that I think would be interesting to add would be a regression line to see how strong of a correlation there is between the two heights.
 
-**Question 2:** Explain the rationale behind the choices you made when creating your scatterplot and barplot, such as size, color, transparency, or other features. What motivated your decisions? 
+**Question 2:** Explain the rationale behind the choices you made when creating your scatterplot and barplot, such as size, color, transparency, or other features. What motivated your decisions?
 
 **ANSWER**
 
-ERASE THIS TEXT AND ANSWER QUESTION HERE
+All three colors I used for both plots came directly from the [IBM "color blind safe" palette](https://davidmathlogic.com/colorblind/#%23648FFF-%23785EF0-%23DC267F-%23FE6100-%23FFB000), and I made sure to use two tones that could not be confused in certain spectra for the scatterplot. I also wanted to clearly show density so I opted for 40% opacity and a larger dot size so that it would still be visible. The barplot was fairly simple because I wanted it to look clean, but I added the bar values for ease of reading.
+
+
 
 **Question 3:** Considering best practices, how does using `coord_fixed()` enhance the authenticity of the information shown in the scatterplot, such as the relationship and spread of the data?
 
 **ANSWER**
 
-ERASE THIS TEXT AND ANSWER QUESTION HERE
+Using `coord_fixed()` helps insure that the spread has not been stretched out or shrunk so that we can more easily see the correlation.
 
 ***
 ```{r}
