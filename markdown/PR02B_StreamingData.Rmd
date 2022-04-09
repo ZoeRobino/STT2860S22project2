@@ -24,6 +24,9 @@ knitr::opts_chunk$set(
 
 ```{r loadpackages}
 library(tidyverse)
+library(dplyr)
+library(ggplot2)
+library(waffle)
 ```
 
 ### Datasets Used
@@ -102,8 +105,14 @@ Create a waffle plot to show the distribution of program `type` on Disney+.
 
 Hint: Use `round(100 * prop.table(table(DATASETNAME$VARIABLENAME)))` to create the input data for the waffle plot. Swap out the capital letter placeholders for the correct dataset name and variable name.
 
+
 ```{r waffleplot}
 
+waffle(round(100 * prop.table(table(disney_data$type))),title = "Streaming Content on Disney+", colors = c("darkseagreen3", "darkseagreen4"), xlab="1 square = ?") +
+theme(plot.title = element_text(hjust = 0.5))
+#Still need below:
+#Use an x-axis label to indicate roughly how many programs each square represents I understand notation but would like to know how to decide what each square scale should be 
+#how to figure out best number of rows 
 ```
 
 ### Visualization 3: Ratings Bar Plot
@@ -113,7 +122,14 @@ Hint: Use `round(100 * prop.table(table(DATASETNAME$VARIABLENAME)))` to create t
 Create a horizontal barplot to show the frequencies of the various `rating` categories for programs on Disney+ (i.e., use `y =` rather than `x =` for the variable you are plotting). **You will need to remove a couple `NA` values first.** Facet by `type` so that you have side-by-side plots for the two different program types. Add an appropriate title and axis labels, as well as other formatting to enhance effectiveness/appearance. 
 
 ```{r ratingsbarplot}
-
+disney_data %>%
+filter(!is.na(rating))
+my_table <- table(disney_data$rating)
+ggplot(data=subset(disney_data, !is.na(rating)), aes(x = frequency(rating), y = rating, na.,fill = type)) +
+  geom_col()+
+  facet_grid(.~type)+
+  labs(x = "Frequency", y = "Ratings", title = "Frequency of Movie and TV Shows by Ratings on Disney+") + 
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ### Visualization 4: Services Bar Plot
