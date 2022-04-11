@@ -466,7 +466,7 @@ pre code {
 
 <h1 class="title toc-ignore">Project 2B: Streaming Data</h1>
 <h4 class="author">Zoe, Sally, Dezi</h4>
-<h4 class="date">Monday, April 11, 2022 @ 07:47 AM</h4>
+<h4 class="date">Monday, April 11, 2022 @ 07:51 AM</h4>
 
 </div>
 
@@ -547,6 +547,9 @@ restriction/audience: <code>TV-Y</code>, <code>TV-Y7</code>,
 <code>TV-PG</code>, <code>PG</code>, <code>PG-13</code>,
 <code>TV-14</code>. If the <code>date_added</code> variable is not
 already in date format, convert it.</p>
+<pre class="r"><code>disney_stream &lt;- disney_data %&gt;%
+  mutate(rating = factor(rating,
+  levels = c(&quot;TV-Y&quot;, &quot;TV-Y7&quot;, &quot;TV-Y7-FV&quot;, &quot;TV-G&quot;, &quot;G&quot;, &quot;TV-PG&quot;, &quot;PG&quot;, &quot;PG-13&quot;, &quot;TV-14&quot;)))</code></pre>
 </div>
 <div id="dataset-2" class="section level4">
 <h4>Dataset #2</h4>

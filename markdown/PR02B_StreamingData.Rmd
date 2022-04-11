@@ -62,7 +62,9 @@ glimpse(streaming_data)
 The Disney+ dataset contains a variable that gives information about the `rating` for each program offering. Convert the variable into a factor that puts the ratings in (roughly) ascending order of age restriction/audience: `TV-Y`, `TV-Y7`, `TV-Y7-FV`, `TV-G`, `G`, `TV-PG`, `PG`, `PG-13`, `TV-14`. If the `date_added` variable is not already in date format, convert it.  
 
 ```{r factorratings}
-
+disney_stream <- disney_data %>%
+  mutate(rating = factor(rating,
+  levels = c("TV-Y", "TV-Y7", "TV-Y7-FV", "TV-G", "G", "TV-PG", "PG", "PG-13", "TV-14")))
 ```
 
 #### Dataset #2
