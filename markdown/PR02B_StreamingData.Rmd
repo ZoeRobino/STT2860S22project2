@@ -148,16 +148,16 @@ ggplot(data=subset(disney_data, !is.na(rating)), aes(x = frequency(rating), y = 
 Create a barplot to display how many shows are offered on each of the four streaming services. Choose appropriate colors, labels, themes, and/or and other types of formatting that you feel will enhance the meaning or visual appearance of the plot. 
 
 ```{r showsbarplot}
-#services = c("Netflix","Hulu","Prime Video","Disney+")
-#cyltable<- table(streaming_data$Netflix,streaming_data$Hulu,streaming_data$`Prime Video`,streaming_data$`Disney+`)
-#ggplot(streaming_data, aes(x = reorder(services, -cyltable), y = cyltable, fill = services))
-#df <- data.frame(streaming_data,services = c("Netflix","Hulu","Prime Video","Disney+"), number_of_shows = c(sum(Netflix), sum(Hulu), sum(`Prime Video`),sum(`Disney+`)))
-
-#aes(x = reorder(services, -number_of_shows), y = number_of_shows, fill = services))+
-#ggplot(df, aes(x = reorder(services, -number_of_shows), y = number_of_shows, fill = services))+
- #geom_bar(stat = "identity")+ 
-  #labs( x = "Services", y = "Number of TV Shows", title = "Count of TV Shows by Service") +
-  #theme(plot.title = element_text(hjust = 0.5)) 
+# services = c("Netflix","Hulu","Prime Video","Disney+")
+# cyltable<- table(streaming_data$Netflix,streaming_data$Hulu,streaming_data$`Prime Video`,streaming_data$`Disney+`)
+# ggplot(streaming_data, aes(x = reorder(services, -cyltable), y = cyltable, fill = services))
+# df <- data.frame(streaming_data,services = c("Netflix","Hulu","Prime Video","Disney+"), number_of_shows = c(sum(Netflix), sum(Hulu), sum(`Prime Video`),sum(`Disney+`)))
+# 
+# aes(x = reorder(services, -number_of_shows), y = number_of_shows, fill = services))+
+# ggplot(df, aes(x = reorder(services, -number_of_shows), y = number_of_shows, fill = services))+
+#  geom_bar(stat = "identity")+
+#   labs( x = "Services", y = "Number of TV Shows", title = "Count of TV Shows by Service") +
+#   theme(plot.title = element_text(hjust = 0.5))
 
 ```
 
@@ -183,26 +183,27 @@ legend("topright", c("all","7+","13+","16+","18+"), cex=0.8, fill=my_table)
 
 **ANSWER**
 
-1)
+1) In Plot 1 We see that The majority of the content on Disney+ is Tv-G and Tv-PG due to the fact that Disney+ is geared towards Children.
 
-2)
+2) We also Notice in the Counts by Service chart, that Disney+ has the least amount of shows, probably because Disney+ most likely only carries Kids shows and non-fiction documentaries.
 
-3)
+3) We also Notice that Netflix Has the highest show count, We suspect that's due to the fact that Netflix is a streaming service built for all ages, which means there are multiple options for every age group causing there to be more overall videos.
 
-4)
+4) We Also Saw in the Last Chart that the viewers that are watching the most are ages 16+, Which might be due to the high electronic consumption by that age group.
 
-5)
+5) Overall, Disney+ is extremely popular for young children and Netflix for everyone overall, and most likely, due to Visual number 5, the age group of 16+
 
-**Question 2:** What other data would you like to have, or which existing variables would you like to see transformed, if you were going to do further explorations or visualizations? Give at least two examples.
-
-**ANSWER**
-
-ERASE THIS TEXT AND ANSWER QUESTION HERE
-
-**Question 3:** Explain the rationale behind the choices you made with regard to plot type, formatting, and so on, when you created Visualization 5. What motivated your decisions? 
+**Question 2:** What other data would you like to have, or which existing variables would you like to see transformed if you were going to do further explorations or visualizations? Give at least two examples.
 
 **ANSWER**
 
+I would Like to see all streaming services divided by rating and age group, as well as see the annual volume per age group of people registering for each streaming service.
+
+**Question 3:** Explain the rationale behind the choices you made with regard to plot type, formatting, and so on when you created Visualization 5. What motivated your decisions? 
+
+**ANSWER**
+
+It was opening up the discussion, we covered Tv ratings but we expanded when we considered who's actually watching these shows and the number of people per age group. It allows us to talk about the individual streaming services while also being able to apply age as well.
 ***
 ```{r}
 sessionInfo()
