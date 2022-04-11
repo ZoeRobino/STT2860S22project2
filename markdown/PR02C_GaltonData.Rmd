@@ -1,6 +1,6 @@
 ---
 title: "Project 2C: Galton Data"
-author: "PUT YOUR NAME HERE"
+author: "Sally,Dezi,Zoe"
 date: '`r format(Sys.time(), "%A, %B %d, %Y @ %I:%M %p")`'
 output: 
   html_document: 
@@ -26,7 +26,10 @@ library(tidyverse)
 library(dplyr)
 library(magrittr)
 library(ggplot2)
+        
 ```
+
+
 
 ### Datasets Used
 
@@ -44,7 +47,6 @@ if(!file.exists("./data/galtonfamiliesmain.csv")){
     download.file(url, destfile = "./data/galtonfamiliesmain.csv")}
 data_main <- read_csv("./data/galtonfamiliesmain.csv")
 glimpse(data_main)
-        
 ```
 
 ```{r}
@@ -73,7 +75,6 @@ data_main <- data_main %>%
   )
 glimpse(data_main)
 ```
-
 #### Galton Subset Dataset
 
 ```{r loadsubdata}
@@ -84,8 +85,8 @@ if(!file.exists("./data/galtonfamiliessub.csv")){
     download.file(url, destfile = "./data/galtonfamiliessub.csv")}
 data_sub <- read_csv("./data/galtonfamiliessub.csv")
 glimpse(data_sub)
-
 ```
+
 
 ```{r}
 data_sub <- data_sub %>%
@@ -114,25 +115,31 @@ data_sub <- data_sub %>%
     desc(height)
   )
 glimpse(data_sub)
+
 ```
 
 #### Galton Notebook Dataset
 
 ```{r loadnotebook}
-url <- "https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonfamiliesnotebook.csv"
-if(!dir.exists("./data/"))
-{dir.create("./data/")}
-if(!file.exists("./data/galtonfamiliesnotebook.csv")){
-    download.file(url, destfile = "./data/galtonfamiliesnotebook.csv")}
-data_notebook <- read_csv("./data/galtonfamiliesnotebook.csv")
-glimpse(data_notebook)
+
+## Loads the data from galtonfamiliesnotebook and names the dataset data_ntbk
+
+data_ntbk <- read_csv("https://raw.githubusercontent.com/STAT-JET-ASU/Datasets/master/Instructor/galtonfamiliesnotebook.csv")
+
+#Displays the contents of data_ntbk
+
+glimpse(data_ntbk)
+
 ```
 
 ```{r}
-data_notebook <- data_notebook %>%
-  select(familyID = FamilyID,
-         page = Page)
-glimpse(data_notebook)
+
+data_ntbk <- data_ntbk %>%
+
+#Mutate the notebook data (change familyID just like in main dataset)
+
+mutate(familyID = as.numeric(ifelse(FamilyID == "136A", 205, FamilyID)))
+
 ```
 
 
@@ -163,13 +170,13 @@ Load the three Galton datasets and use `glimpse()` to explore their structures. 
 
 ```{r assembledata1}
 bind_rows(data_main, data_sub) -> data_new
-merge(x=data_new, y=data_notebook, by="familyID") %>%
+merge(x=data_new, y=data_ntbk, by="familyID") %>%
   arrange(familyID,
           factor(child_gen, levels=c('Son','Daugter')),
           height) -> data_all
 glimpse(data_all)
-```
 
+```
 
 #### Dataset #2
 
@@ -177,9 +184,15 @@ From Dataset #1, select the variables `familyid` and `num_children`, then reduce
 
 ```{r assembledata2}
 dataset_2 <- data_all %>%
+
   select(familyid = familyID,
+
          num_children = child_num) %>%
+
   distinct()
+
+## Use `glimpse()` to display the result. (Hint: The final dataset should have 205 rows/observations and two variables/columns.)
+
 glimpse(dataset_2)
 ```
 
@@ -214,8 +227,9 @@ Include the following.
 * use `theme()` to move the legend to the bottom of the scatterplot
 
 ```{r updatedscatterplot}
+
 p1 <- ggplot(data_all, aes(x=height, y=midparent, color=child_gen)) +
-  geom_point(alpha=.35, size=2.5) +
+  geom_point(alpha=.50, size=2.5) +
   scale_color_manual(values = c("#FFB000","#648FFF")) +
   scale_x_continuous(breaks= 55:80) + 
   scale_y_continuous(breaks= 64:76) + 
@@ -223,7 +237,10 @@ p1 <- ggplot(data_all, aes(x=height, y=midparent, color=child_gen)) +
   labs(color = "Gender of child", title = "Average of the parents’ heights versus the height of children by gender", x = "Childrens height in inches", y="Parents height in inches") + 
   theme_linedraw()
 p1 + theme(legend.position = "bottom")
+
 ```
+
+ 
 
 ### Visualization 2: Number of Children
 
@@ -232,6 +249,7 @@ p1 + theme(legend.position = "bottom")
 Create a barplot to show the distribution of the number of children per family. Set the bars to something other than the default `width`. Scale the x-axis so that there is a tick mark for each bar. Choose appropriate colors, labels, themes, and/or and other types of formatting that you feel will enhance the meaning or visual appearance of the plot.  (Hint: Use `count()` to find out how many families have a given number of children, then use that information to create your plot.)
 
 ```{r childrenbarplot}
+
 ggplot(dataset_2, aes(num_children)) +
   geom_bar(width = 1, color = "white", fill = "#DC267F") +
   scale_x_continuous(breaks= 0:15) +
@@ -241,7 +259,6 @@ ggplot(dataset_2, aes(num_children)) +
 
 ```
 
-<hr>
 
 ## Questions
 
