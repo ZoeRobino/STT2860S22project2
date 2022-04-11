@@ -148,8 +148,12 @@ ggplot(data=subset(disney_data, !is.na(rating)), aes(x = frequency(rating), y = 
 Create a barplot to display how many shows are offered on each of the four streaming services. Choose appropriate colors, labels, themes, and/or and other types of formatting that you feel will enhance the meaning or visual appearance of the plot. 
 
 ```{r showsbarplot}
-
+#services = c("Netflix","Hulu","Prime Video","Disney+")
+#cyltable<- table(streaming_data$Netflix,streaming_data$Hulu,streaming_data$`Prime Video`,streaming_data$`Disney+`)
+#ggplot(streaming_data, aes(x = reorder(services, -cyltable), y = cyltable, fill = services))
 #df <- data.frame(streaming_data,services = c("Netflix","Hulu","Prime Video","Disney+"), number_of_shows = c(sum(Netflix), sum(Hulu), sum(`Prime Video`),sum(`Disney+`)))
+
+#aes(x = reorder(services, -number_of_shows), y = number_of_shows, fill = services))+
 #ggplot(df, aes(x = reorder(services, -number_of_shows), y = number_of_shows, fill = services))+
  #geom_bar(stat = "identity")+ 
   #labs( x = "Services", y = "Number of TV Shows", title = "Count of TV Shows by Service") +
@@ -162,13 +166,13 @@ Create a barplot to display how many shows are offered on each of the four strea
 Create one other plot of your choice using either dataset to explore a question of interest. You are welcome to perform additional manipulations on the data, if needed. Add an appropriate title and axis labels, as well as any other necessary formatting.
 
 ```{r}
-#streaming_data%>%
-#sum(Age)
-#ggplot(df, aes(x = reorder(services, -number_of_shows), y = number_of_shows, fill = services))+
- #geom_bar(stat = "identity")+ 
- # labs( x = "Services", y = "Number of TV Shows", title = "Count of TV Shows by Service") +
-  #theme(plot.title = element_text(hjust = 0.5)) 
+my_table <- table(streaming_data$Age)
+lbls <- paste(names(my_table), "\n", my_table, sep="")
+pie(my_table, main="Piechart for Shows in age group", col=rainbow(length(my_table)),labels = lbls,lty = 2)
 
+
+legend("topright", c("all","7+","13+","16+","18+"), cex=0.8, fill=my_table)
+  # main="Pie Chart of Species\n (with sample sizes)")
 ```
 
 <hr>
