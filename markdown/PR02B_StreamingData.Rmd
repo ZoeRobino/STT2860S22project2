@@ -125,7 +125,7 @@ Create a horizontal barplot to show the frequencies of the various `rating` cate
 disney_data %>%
 filter(!is.na(rating))
 my_table <- table(disney_data$rating)
-ggplot(data=subset(disney_data, !is.na(rating)), aes(x = frequency(rating), y = rating, na.,fill = type)) +
+ggplot(data=subset(disney_data, !is.na(rating)), aes(x = frequency(rating), y = rating,fill = type)) +
   geom_col()+
   facet_grid(.~type)+
   labs(x = "Frequency", y = "Ratings", title = "Frequency of Movie and TV Shows by Ratings on Disney+") + 
@@ -139,7 +139,13 @@ ggplot(data=subset(disney_data, !is.na(rating)), aes(x = frequency(rating), y = 
 Create a barplot to display how many shows are offered on each of the four streaming services. Choose appropriate colors, labels, themes, and/or and other types of formatting that you feel will enhance the meaning or visual appearance of the plot. 
 
 ```{r showsbarplot}
-
+#streaming_data %>%
+#my_table2 <- table(Hulu$Title)
+#ggplot(my_table2,aes(x = frequency(Title), y = Title)) +
+  #geom_col()+
+ # facet_grid(.~	Netflix,Hulu,Prime Video,Disney+)
+ # #labs(x = "Frequency", y = "Ratings", title = "Frequency of Movie and TV Shows by Ratings on Disney+") + 
+  #theme(plot.title = element_text(hjust = 0.5))
 ```
 
 ### Visualization 5: Choose a Plot!
