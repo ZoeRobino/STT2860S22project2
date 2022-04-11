@@ -148,16 +148,17 @@ ggplot(data=subset(disney_data, !is.na(rating)), aes(x = frequency(rating), y = 
 Create a barplot to display how many shows are offered on each of the four streaming services. Choose appropriate colors, labels, themes, and/or and other types of formatting that you feel will enhance the meaning or visual appearance of the plot. 
 
 ```{r showsbarplot}
-# services = c("Netflix","Hulu","Prime Video","Disney+")
-# cyltable<- table(streaming_data$Netflix,streaming_data$Hulu,streaming_data$`Prime Video`,streaming_data$`Disney+`)
-# ggplot(streaming_data, aes(x = reorder(services, -cyltable), y = cyltable, fill = services))
-# df <- data.frame(streaming_data,services = c("Netflix","Hulu","Prime Video","Disney+"), number_of_shows = c(sum(Netflix), sum(Hulu), sum(`Prime Video`),sum(`Disney+`)))
-# 
-# aes(x = reorder(services, -number_of_shows), y = number_of_shows, fill = services))+
-# ggplot(df, aes(x = reorder(services, -number_of_shows), y = number_of_shows, fill = services))+
-#  geom_bar(stat = "identity")+
-#   labs( x = "Services", y = "Number of TV Shows", title = "Count of TV Shows by Service") +
-#   theme(plot.title = element_text(hjust = 0.5))
+services = c("Netflix","Hulu","Prime Video","Disney+")
+cyltable<- table(streaming_data$Netflix,streaming_data$Hulu,streaming_data$`Prime Video`,streaming_data$`Disney+`)
+df <- data.frame(services,cyltable)
+
+ggplot(df, aes(x = reorder(services, -cyltable), y = cyltable, fill = services))+
+ geom_bar(stat = "identity")+ 
+ 
+  labs( x = "Services", y = "Number of TV Shows", title = "Count of TV Shows by Service") +
+  theme(plot.title = element_text(hjust = 0.5)) 
+
+
 
 ```
 
