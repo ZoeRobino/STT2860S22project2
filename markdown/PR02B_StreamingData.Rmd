@@ -75,6 +75,14 @@ From the streaming content dataset, create a new dataset by doing the following.
 * Split the `Rotten Tomatoes` variable to separate the show rating from the max of `100`. Convert the show rating to a numerical variable.
 
 ```{r pivotlong}
+streaming_data %>%
+  pivot_longer(cols = 'Netflix':'Disney+',
+               names_to = 'Service',
+               values_to = 'YesNo') %>%
+  filter(YesNo == 1) 
+ separate(streaming_data, col = IMDb , into = c("ratingIMDb", max = 10), sep = "/")
+ separate(streaming_data, col = `Rotten Tomatoes`, into = c("rating`Rotten Tomatoes`", max = 100), sep = "/")       
+
 
 ```
 
@@ -107,13 +115,12 @@ Hint: Use `round(100 * prop.table(table(DATASETNAME$VARIABLENAME)))` to create t
 
 
 ```{r waffleplot}
+library(waffle)
 
-waffle(round(100 * prop.table(table(disney_data$type))),title = "Streaming Content on Disney+", colors = c("darkseagreen3", "darkseagreen4"), xlab="1 square = ?") +
-theme(plot.title = element_text(hjust = 0.5))
-#Still need below:
-#Use an x-axis label to indicate roughly how many programs each square represents I understand notation but would like to know how to decide what each square scale should be 
-#how to figure out best number of rows 
-```
+waffle(round(100 * prop.table(table(disney_data$rating))),  x = 'Programs Per Square', title = 'Streaming Content on Disney+', colors = c('palegreen','palegreen4','skyblue','skyblue4', 'mediumpurple', 'mediumorchid4', 'hotpink', 'hotpink4', 'royalblue'))
+```  
+
+
 
 ### Visualization 3: Ratings Bar Plot
 
@@ -122,7 +129,7 @@ theme(plot.title = element_text(hjust = 0.5))
 Create a horizontal barplot to show the frequencies of the various `rating` categories for programs on Disney+ (i.e., use `y =` rather than `x =` for the variable you are plotting). **You will need to remove a couple `NA` values first.** Facet by `type` so that you have side-by-side plots for the two different program types. Add an appropriate title and axis labels, as well as other formatting to enhance effectiveness/appearance. 
 
 ```{r ratingsbarplot}
-disney_data %>%
+disney_data%>%
 filter(!is.na(rating))
 my_table <- table(disney_data$rating)
 ggplot(data=subset(disney_data, !is.na(rating)), aes(x = frequency(rating), y = rating,fill = type)) +
@@ -130,7 +137,9 @@ ggplot(data=subset(disney_data, !is.na(rating)), aes(x = frequency(rating), y = 
   facet_grid(.~type)+
   labs(x = "Frequency", y = "Ratings", title = "Frequency of Movie and TV Shows by Ratings on Disney+") + 
   theme(plot.title = element_text(hjust = 0.5))
+ 
 ```
+
 
 ### Visualization 4: Services Bar Plot
 
@@ -139,13 +148,13 @@ ggplot(data=subset(disney_data, !is.na(rating)), aes(x = frequency(rating), y = 
 Create a barplot to display how many shows are offered on each of the four streaming services. Choose appropriate colors, labels, themes, and/or and other types of formatting that you feel will enhance the meaning or visual appearance of the plot. 
 
 ```{r showsbarplot}
-#streaming_data %>%
-#my_table2 <- table(Hulu$Title)
-#ggplot(my_table2,aes(x = frequency(Title), y = Title)) +
-  #geom_col()+
- # facet_grid(.~	Netflix,Hulu,Prime Video,Disney+)
- # #labs(x = "Frequency", y = "Ratings", title = "Frequency of Movie and TV Shows by Ratings on Disney+") + 
-  #theme(plot.title = element_text(hjust = 0.5))
+
+#df <- data.frame(streaming_data,services = c("Netflix","Hulu","Prime Video","Disney+"), number_of_shows = c(sum(Netflix), sum(Hulu), sum(`Prime Video`),sum(`Disney+`)))
+#ggplot(df, aes(x = reorder(services, -number_of_shows), y = number_of_shows, fill = services))+
+ #geom_bar(stat = "identity")+ 
+  #labs( x = "Services", y = "Number of TV Shows", title = "Count of TV Shows by Service") +
+  #theme(plot.title = element_text(hjust = 0.5)) 
+
 ```
 
 ### Visualization 5: Choose a Plot!
@@ -153,6 +162,12 @@ Create a barplot to display how many shows are offered on each of the four strea
 Create one other plot of your choice using either dataset to explore a question of interest. You are welcome to perform additional manipulations on the data, if needed. Add an appropriate title and axis labels, as well as any other necessary formatting.
 
 ```{r}
+#streaming_data%>%
+#sum(Age)
+#ggplot(df, aes(x = reorder(services, -number_of_shows), y = number_of_shows, fill = services))+
+ #geom_bar(stat = "identity")+ 
+ # labs( x = "Services", y = "Number of TV Shows", title = "Count of TV Shows by Service") +
+  #theme(plot.title = element_text(hjust = 0.5)) 
 
 ```
 
