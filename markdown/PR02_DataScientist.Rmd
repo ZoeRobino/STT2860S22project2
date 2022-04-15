@@ -1,8 +1,7 @@
 ---
 title: "Becoming a Data Scientist"
 subtitle: "STT2860 S22 Project 02"
-author: "Author: YOUR NAME HERE"
-date: "`r format(Sys.time(), '%A, %B %d, %Y @ %I:%M %p')`"
+author: "Zoe Robino"
 output: 
   html_document: 
     theme: yeti
@@ -12,38 +11,56 @@ output:
 
 **Q1: What is the name of the person interviewed?**
 
-ANSWER:
+ANSWER: 
+
+Debbie Berebichez
 
 **Q2: Why did you choose the particular interview you did?**
 
 ANSWER:
 
+I wanted to hear from another women in stem again. I speciffially picked this podcast because not only is she a women in stem but she is also a Hispanic women.I felt I could resonate with her personally on another level of breaking the glass sealing as not only a women but a women of a minority. 
 **Q3: Does the person consider themselves a data scientist?**
 
-ANSWER:
+ANSWER: 
+
+She says she considers herself physicist first and foremost but she says yes she does consider herself a data scientist as well. 
 
 **Q4: What is their formal and self-taught education in data science?**
 
 ANSWER:
 
+She went to school in a European system. She did two years of philosophy and then dived into mathematical philosophy and she began to teach herself linear algebra ,calculus, and etc. She then applied to schools in the US and then got accepted into a university in Massachusetts. A professor saw potential in her and decided to tutor her and helped her study derivatives,integrals,classical mechanics for a summer and she was able to take a test and surpass the first two years of a physics major and go on to get a philosophy and physics major. Then went to Stanford for a phd.
+
 **Q5: What has been their career path? Did they start off in data science?**
 
-ANSWER:
+ANSWER: 
+
+She started her career by going on a TV show created by National Geographic to teach others physics. She also was an ambassador at a tech company that was 3 month program for high school girls. They were taught how to create an app that solves a problem in their community, how to create a business model around it and how to pitch it to entrepreneur. She was also part of girls inc. which created the first data science program for high school girls. She works at Metis right now which is a data science training company. She worked at MSCI and was building models and data for finance. She then talked to a friend who was a data scientist for linkedin and he told her that she has already been doing the work of data science in her previous studies and jobs. She became a principal data scientist in retail and healthcare. She started as a physicists but then started to move out of academia in physics and switched to data science. 
 
 **Q6: What programs/technologies to they use when working in data science?**
 
-ANSWER:
+ANSWER
+
+She uses python for tableuar datasets and EDA concepts along with SQL. Some packages used are Matplotlib and code is write in python jupyter notebook.
 
 **Q7: What is one interesting (to you) data science problem they have worked on?**
 
 ANSWER:
 
+When she was doing her postdocs Joe Keller and her published a paper on a calculation of rating golf courses for a popular golf magazine.
+
 **Q8: Are there any specific pieces of advice they gave that inspire/resonate with you?**
 
 ANSWER:
 
+Taking the leap is the hardest part. She says once you're in you're in and you can learn as you go as long as you have that basic understanding from school. Pick something you know a little bit about so you can challenger yourself to learn versus going into to something completely foreign.
+
 **Q9: Was there anything that surprised you or that you particularly identified with?**
 
 ANSWER:
+
+I particularly resonated with her saying how her family and culture was conservative with women going into a stem field. It spoke to me with coming from a more conservative culture in this sense that women need to be presented as more feminine for males. With the eye of the culture wanting a women to be a good prospect for a man to marry them based off their field or there passions in the math and how men don't want a strong independent women in a sense which is not true. I really appreciated her opening up about that because at the end of the day it's not who you are for someone else but who you are and what you decide to do purely just for you. 
+
 
 ***
